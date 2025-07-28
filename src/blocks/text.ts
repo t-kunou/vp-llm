@@ -98,6 +98,48 @@ const createModel = {
   helpUrl: '',
 };
 
+// Dictionary creation block with variable length key-value pairs
+const createDict = {
+  type: 'create_dict',
+  message0: 'create dictionary %1 %2',
+  args0: [
+    {
+      type: 'input_dummy',
+    },
+    {
+      type: 'input_statement',
+      name: 'PAIRS',
+    },
+  ],
+  output: null,
+  colour: 290,
+  tooltip: 'Create a dictionary with key-value pairs',
+  helpUrl: '',
+};
+
+// Dictionary pair block (used inside the dictionary block)
+const dictPair = {
+  type: 'dict_pair',
+  message0: 'key: %1 value: %2',
+  args0: [
+    {
+      type: 'input_value',
+      name: 'KEY',
+      check: 'String',
+    },
+    {
+      type: 'input_value',
+      name: 'VALUE',
+      check: null,
+    },
+  ],
+  previousStatement: null,
+  nextStatement: null,
+  colour: 290,
+  tooltip: 'A key-value pair for dictionary',
+  helpUrl: '',
+};
+
 // Create the block definitions for the JSON-only blocks.
 // This does not register their definitions with Blockly.
 // This file has no side effects!
@@ -105,4 +147,6 @@ export const blocks = Blockly.common.createBlockDefinitionsFromJsonArray([
   addText,
   llmQuery,
   createModel,
+  createDict,
+  dictPair,
 ]);

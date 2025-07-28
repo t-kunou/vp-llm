@@ -52,3 +52,35 @@ forBlock['create_model'] = function (
   
   return [code, Order.FUNCTION_CALL];
 };
+
+forBlock['create_dict'] = function (
+  block: Blockly.Block,
+  generator: Blockly.CodeGenerator,
+) {
+  const pairs = generator.statementToCode(block, 'PAIRS');
+  
+  if (pairs) {
+    // Extract key-value pairs from the statement code and ensure proper comma separation
+    const lines = pairs.trim().split('\n');
+    const dictItems = lines
+      .map(line => line.trim())
+      .filter(line => line && !line.startsWith('#'))
+      .join(', ');
+    
+    const code = `{${dictItems}}`;
+    return [code, Order.ATOMIC];
+  } else {
+    return ['{}', Order.ATOMIC];
+  }
+};
+
+forBlock['dict_pair'] = function (
+  block: Blockly.Block,
+  generator: Blockly.CodeGenerator,
+) {
+  const key = generator.valueToCode(block, 'KEY', Order.NONE) || '""';
+  const value = generator.valueToCode(block, 'VALUE', Order.NONE) || 'None';
+  
+  const code = `${key}: ${value}\n`;
+  return code;
+};

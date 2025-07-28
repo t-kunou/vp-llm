@@ -611,6 +611,21 @@ export const toolbox = {
       ],
     },
     {
+      kind: 'category',
+      name: 'Dictionary',
+      categorystyle: 'variable_category',
+      contents: [
+        {
+          kind: 'block',
+          type: 'create_dict',
+        },
+        {
+          kind: 'block',
+          type: 'dict_pair',
+        },
+      ],
+    },
+    {
       kind: 'sep',
     },
     {
