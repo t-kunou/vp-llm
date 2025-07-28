@@ -33,10 +33,7 @@ forBlock['llm_query'] = function (
   const variables = generator.valueToCode(block, 'VARIABLES', Order.NONE) || '{}';
   const parser = generator.valueToCode(block, 'PARSER', Order.NONE) || 'StrOutputParser()';
   
-  // Generate Python code for LLM query using LangChain
-  const code = `# LLM Query using LangChain
-# Import required if not already imported: from langchain_core.output_parsers import StrOutputParser
-result = ${parser}.invoke(${model}.invoke(${template}.format(**${variables})))`;
+  const code = `${parser}.invoke(${model}.invoke(${template}.format(**${variables})))`;
   
   return [code, Order.FUNCTION_CALL];
 };
@@ -50,10 +47,7 @@ forBlock['create_model'] = function (
   
   let code = '';
   if (provider === 'openai') {
-    // Generate Python code for OpenAI model creation
-    code = `# Create OpenAI model
-# Import required: from langchain_openai import ChatOpenAI
-ChatOpenAI(model=${modelName})`;
+    code = `ChatOpenAI(model=${modelName})`;
   }
   
   return [code, Order.FUNCTION_CALL];
