@@ -40,7 +40,8 @@ const ws = Blockly.inject(blocklyDiv, {
     maxScale: 3,
     minScale: 0.3,
     scaleSpeed: 1.2
-  }
+  },
+  trashcan: true // ゴミ箱機能を有効化
 });
 
 // Copy functionality
