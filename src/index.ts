@@ -34,7 +34,7 @@ const ws = Blockly.inject(blocklyDiv, {
     snap: true
   },
   zoom: {
-    controls: false, // ズームコントロールは独自実装を使用
+    controls: true, // Blockly標準のズームコントロールを使用
     wheel: true,
     startScale: 1.0,
     maxScale: 3,
@@ -88,33 +88,6 @@ const copyCodeToClipboard = async () => {
 // Add click event listener to copy button
 if (copyButton) {
   copyButton.addEventListener('click', copyCodeToClipboard);
-}
-
-// Zoom functionality
-const zoomInButton = document.getElementById('zoomInButton');
-const zoomOutButton = document.getElementById('zoomOutButton');
-const zoomResetButton = document.getElementById('zoomResetButton');
-
-// Add zoom event listeners
-if (zoomInButton && ws) {
-  zoomInButton.addEventListener('click', () => {
-    const currentZoom = ws.getScale();
-    ws.setScale(currentZoom * 1.2);
-  });
-}
-
-if (zoomOutButton && ws) {
-  zoomOutButton.addEventListener('click', () => {
-    const currentZoom = ws.getScale();
-    ws.setScale(currentZoom / 1.2);
-  });
-}
-
-if (zoomResetButton && ws) {
-  zoomResetButton.addEventListener('click', () => {
-    ws.setScale(1);
-    ws.scrollCenter();
-  });
 }
 
 // This function resets the code and output divs, shows the
