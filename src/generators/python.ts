@@ -40,3 +40,21 @@ result = ${parser}.invoke(${model}.invoke(${template}.format(**${variables})))`;
   
   return [code, Order.FUNCTION_CALL];
 };
+
+forBlock['create_model'] = function (
+  block: Blockly.Block,
+  generator: Blockly.CodeGenerator,
+) {
+  const provider = block.getFieldValue('PROVIDER');
+  const modelName = generator.valueToCode(block, 'MODEL_NAME', Order.NONE) || '"gpt-3.5-turbo"';
+  
+  let code = '';
+  if (provider === 'openai') {
+    // Generate Python code for OpenAI model creation
+    code = `# Create OpenAI model
+# Import required: from langchain_openai import ChatOpenAI
+ChatOpenAI(model=${modelName})`;
+  }
+  
+  return [code, Order.FUNCTION_CALL];
+};

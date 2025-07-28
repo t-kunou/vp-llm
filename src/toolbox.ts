@@ -635,6 +635,10 @@ export const toolbox = {
       contents: [
         {
           kind: 'block',
+          type: 'create_model',
+        },
+        {
+          kind: 'block',
           type: 'llm_query',
         },
       ],

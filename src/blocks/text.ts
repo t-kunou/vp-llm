@@ -71,10 +71,38 @@ const llmQuery = {
   helpUrl: '',
 };
 
+// LLM Model creation block
+const createModel = {
+  type: 'create_model',
+  message0: 'Create %1 model %2 model name: %3',
+  args0: [
+    {
+      type: 'field_dropdown',
+      name: 'PROVIDER',
+      options: [
+        ['OpenAI', 'openai'],
+      ],
+    },
+    {
+      type: 'input_dummy',
+    },
+    {
+      type: 'input_value',
+      name: 'MODEL_NAME',
+      check: 'String',
+    },
+  ],
+  output: null,
+  colour: 290,
+  tooltip: 'Create an LLM model instance',
+  helpUrl: '',
+};
+
 // Create the block definitions for the JSON-only blocks.
 // This does not register their definitions with Blockly.
 // This file has no side effects!
 export const blocks = Blockly.common.createBlockDefinitionsFromJsonArray([
   addText,
   llmQuery,
+  createModel,
 ]);
