@@ -21,6 +21,8 @@ const codeDiv = document.getElementById('generatedCode')?.firstChild;
 const outputDiv = document.getElementById('output');
 const blocklyDiv = document.getElementById('blocklyDiv');
 const copyButton = document.getElementById('copyButton');
+const toggleButton = document.getElementById('toggleButton');
+const outputPane = document.getElementById('outputPane');
 
 if (!blocklyDiv) {
   throw new Error(`div with id 'blocklyDiv' not found`);
@@ -89,6 +91,35 @@ const copyCodeToClipboard = async () => {
 // Add click event listener to copy button
 if (copyButton) {
   copyButton.addEventListener('click', copyCodeToClipboard);
+}
+
+// Toggle panel functionality
+let isPanelVisible = true;
+
+const togglePanel = () => {
+  if (!outputPane || !toggleButton) return;
+  
+  isPanelVisible = !isPanelVisible;
+  
+  if (isPanelVisible) {
+    outputPane.classList.remove('hidden');
+    toggleButton.textContent = '>>';
+  } else {
+    outputPane.classList.add('hidden');
+    toggleButton.textContent = '<<';
+  }
+  
+  // Trigger Blockly resize after animation
+  setTimeout(() => {
+    if (ws) {
+      Blockly.svgResize(ws);
+    }
+  }, 300);
+};
+
+// Add click event listener to toggle button
+if (toggleButton) {
+  toggleButton.addEventListener('click', togglePanel);
 }
 
 // This function resets the code and output divs, shows the
