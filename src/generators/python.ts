@@ -23,3 +23,20 @@ forBlock['add_text'] = function (
   const code = `# Add text to output\nprint(${text})\n`;
   return code;
 };
+
+forBlock['llm_query'] = function (
+  block: Blockly.Block,
+  generator: Blockly.CodeGenerator,
+) {
+  const model = generator.valueToCode(block, 'MODEL', Order.NONE) || 'None';
+  const template = generator.valueToCode(block, 'TEMPLATE', Order.NONE) || 'None';
+  const variables = generator.valueToCode(block, 'VARIABLES', Order.NONE) || '{}';
+  const parser = generator.valueToCode(block, 'PARSER', Order.NONE) || 'StrOutputParser()';
+  
+  // Generate Python code for LLM query using LangChain
+  const code = `# LLM Query using LangChain
+# Import required if not already imported: from langchain_core.output_parsers import StrOutputParser
+result = ${parser}.invoke(${model}.invoke(${template}.format(**${variables})))`;
+  
+  return [code, Order.FUNCTION_CALL];
+};

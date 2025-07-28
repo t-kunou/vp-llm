@@ -625,5 +625,19 @@ export const toolbox = {
       categorystyle: 'procedure_category',
       custom: 'PROCEDURE',
     },
+    {
+      kind: 'sep',
+    },
+    {
+      kind: 'category',
+      name: 'LLM',
+      categorystyle: 'procedure_category',
+      contents: [
+        {
+          kind: 'block',
+          type: 'llm_query',
+        },
+      ],
+    },
   ],
 };
