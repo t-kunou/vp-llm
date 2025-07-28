@@ -52,15 +52,15 @@ code {
 }
 
 #zoomControls #zoomInButton {
-  background-position: 0px -92px !important;
-}
-
-#zoomControls #zoomOutButton {
   background-position: -32px -92px !important;
 }
 
-#zoomControls #zoomResetButton {
+#zoomControls #zoomOutButton {
   background-position: -64px -92px !important;
+}
+
+#zoomControls #zoomResetButton {
+  background-position: 0px -92px !important;
 }
 
 #zoomControls button:hover {
