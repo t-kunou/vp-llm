@@ -52,8 +52,6 @@ code {
   color: #666;
   user-select: none;
   transition: background-color 0.2s ease;
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
 }
 
 #toggleButton:hover {
