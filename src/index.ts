@@ -74,6 +74,33 @@ if (copyButton) {
   copyButton.addEventListener('click', copyCodeToClipboard);
 }
 
+// Zoom functionality
+const zoomInButton = document.getElementById('zoomInButton');
+const zoomOutButton = document.getElementById('zoomOutButton');
+const zoomResetButton = document.getElementById('zoomResetButton');
+
+// Add zoom event listeners
+if (zoomInButton && ws) {
+  zoomInButton.addEventListener('click', () => {
+    const currentZoom = ws.getScale();
+    ws.setScale(currentZoom * 1.2);
+  });
+}
+
+if (zoomOutButton && ws) {
+  zoomOutButton.addEventListener('click', () => {
+    const currentZoom = ws.getScale();
+    ws.setScale(currentZoom / 1.2);
+  });
+}
+
+if (zoomResetButton && ws) {
+  zoomResetButton.addEventListener('click', () => {
+    ws.setScale(1);
+    ws.scrollCenter();
+  });
+}
+
 // This function resets the code and output divs, shows the
 // generated code from the workspace, and evals the code.
 // In a real application, you probably shouldn't use `eval`.
