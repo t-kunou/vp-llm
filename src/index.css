@@ -19,6 +19,62 @@ code {
   flex-basis: 100%;
   height: 100%;
   min-width: 600px;
+  position: relative;
+}
+
+#zoomControls {
+  position: absolute;
+  bottom: 104px;
+  right: 42px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#zoomControls button {
+  background: transparent url('https://blockly-demo.appspot.com/static/media/sprites.png') no-repeat 0px 0px;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  cursor: pointer;
+  font-size: 0;
+  box-shadow: none;
+  transition: opacity 0.2s;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  margin: 0;
+  opacity: 0.6;
+}
+
+#zoomControls #zoomInButton {
+  background-position: 0px -92px !important;
+}
+
+#zoomControls #zoomOutButton {
+  background-position: -32px -92px !important;
+}
+
+#zoomControls #zoomResetButton {
+  background-position: -64px -92px !important;
+}
+
+#zoomControls button:hover {
+  opacity: 1;
+}
+
+#zoomControls button:active {
+  opacity: 0.8;
+}
+
+#zoomControls button:focus {
+  outline: 2px solid rgba(66, 133, 244, 0.6);
+  outline-offset: 1px;
+  border-radius: 4px;
 }
 
 #outputPane {
