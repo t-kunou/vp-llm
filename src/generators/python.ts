@@ -84,3 +84,60 @@ forBlock['dict_pair'] = function (
   const code = `${key}: ${value}\n`;
   return code;
 };
+
+forBlock['dict_length'] = function (
+  block: Blockly.Block,
+  generator: Blockly.CodeGenerator,
+) {
+  const dict = generator.valueToCode(block, 'DICT', Order.NONE) || '{}';
+  const code = `len(${dict})`;
+  return [code, Order.FUNCTION_CALL];
+};
+
+forBlock['dict_is_empty'] = function (
+  block: Blockly.Block,
+  generator: Blockly.CodeGenerator,
+) {
+  const dict = generator.valueToCode(block, 'DICT', Order.NONE) || '{}';
+  const code = `len(${dict}) == 0`;
+  return [code, Order.RELATIONAL];
+};
+
+forBlock['dict_has_key'] = function (
+  block: Blockly.Block,
+  generator: Blockly.CodeGenerator,
+) {
+  const dict = generator.valueToCode(block, 'DICT', Order.NONE) || '{}';
+  const key = generator.valueToCode(block, 'KEY', Order.NONE) || '""';
+  const code = `${key} in ${dict}`;
+  return [code, Order.RELATIONAL];
+};
+
+forBlock['dict_keys'] = function (
+  block: Blockly.Block,
+  generator: Blockly.CodeGenerator,
+) {
+  const dict = generator.valueToCode(block, 'DICT', Order.NONE) || '{}';
+  const code = `list(${dict}.keys())`;
+  return [code, Order.FUNCTION_CALL];
+};
+
+forBlock['dict_get'] = function (
+  block: Blockly.Block,
+  generator: Blockly.CodeGenerator,
+) {
+  const dict = generator.valueToCode(block, 'DICT', Order.NONE) || '{}';
+  const key = generator.valueToCode(block, 'KEY', Order.NONE) || '""';
+  const code = `${dict}[${key}]`;
+  return [code, Order.MEMBER];
+};
+
+forBlock['dict_delete'] = function (
+  block: Blockly.Block,
+  generator: Blockly.CodeGenerator,
+) {
+  const dict = generator.valueToCode(block, 'DICT', Order.NONE) || '{}';
+  const key = generator.valueToCode(block, 'KEY', Order.NONE) || '""';
+  const code = `del ${dict}[${key}]\n`;
+  return code;
+};

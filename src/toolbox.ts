@@ -623,6 +623,30 @@ export const toolbox = {
           kind: 'block',
           type: 'dict_pair',
         },
+        {
+          kind: 'block',
+          type: 'dict_length',
+        },
+        {
+          kind: 'block',
+          type: 'dict_is_empty',
+        },
+        {
+          kind: 'block',
+          type: 'dict_has_key',
+        },
+        {
+          kind: 'block',
+          type: 'dict_keys',
+        },
+        {
+          kind: 'block',
+          type: 'dict_get',
+        },
+        {
+          kind: 'block',
+          type: 'dict_delete',
+        },
       ],
     },
     {
