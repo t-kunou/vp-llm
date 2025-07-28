@@ -6,36 +6,95 @@
 
 import * as Blockly from 'blockly';
 import {blocks} from './blocks/text';
-import {forBlock} from './generators/javascript';
-import {javascriptGenerator} from 'blockly/javascript';
+import {forBlock} from './generators/python';
+import {pythonGenerator} from 'blockly/python';
 import {save, load} from './serialization';
 import {toolbox} from './toolbox';
 import './index.css';
 
 // Register the blocks and generator with Blockly
 Blockly.common.defineBlocks(blocks);
-Object.assign(javascriptGenerator.forBlock, forBlock);
+Object.assign(pythonGenerator.forBlock, forBlock);
 
 // Set up UI elements and inject Blockly
 const codeDiv = document.getElementById('generatedCode')?.firstChild;
 const outputDiv = document.getElementById('output');
 const blocklyDiv = document.getElementById('blocklyDiv');
+const copyButton = document.getElementById('copyButton');
 
 if (!blocklyDiv) {
   throw new Error(`div with id 'blocklyDiv' not found`);
 }
 const ws = Blockly.inject(blocklyDiv, {toolbox});
 
+// Copy functionality
+const copyCodeToClipboard = async () => {
+  const codeElement = document.getElementById('generatedCode');
+  if (!codeElement || !copyButton) return;
+  
+  const code = codeElement.textContent || '';
+  
+  try {
+    await navigator.clipboard.writeText(code);
+    
+    // Visual feedback
+    const originalText = copyButton.textContent;
+    copyButton.textContent = '✓ Copied!';
+    copyButton.classList.add('copied');
+    
+    // Reset button after 2 seconds
+    setTimeout(() => {
+      copyButton.textContent = originalText;
+      copyButton.classList.remove('copied');
+    }, 2000);
+    
+  } catch (err) {
+    // Fallback for older browsers
+    const textArea = document.createElement('textarea');
+    textArea.value = code;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textArea);
+    
+    // Visual feedback for fallback
+    const originalText = copyButton.textContent;
+    copyButton.textContent = '✓ Copied!';
+    copyButton.classList.add('copied');
+    
+    setTimeout(() => {
+      copyButton.textContent = originalText;
+      copyButton.classList.remove('copied');
+    }, 2000);
+  }
+};
+
+// Add click event listener to copy button
+if (copyButton) {
+  copyButton.addEventListener('click', copyCodeToClipboard);
+}
+
 // This function resets the code and output divs, shows the
 // generated code from the workspace, and evals the code.
 // In a real application, you probably shouldn't use `eval`.
 const runCode = () => {
-  const code = javascriptGenerator.workspaceToCode(ws as Blockly.Workspace);
-  if (codeDiv) codeDiv.textContent = code;
+  const code = pythonGenerator.workspaceToCode(ws as Blockly.Workspace);
+  
+  // Add a header comment and make it more executable
+  const executableCode = `#!/usr/bin/env python3
+# Generated Python code from Blockly
+# You can copy this code and run it in any Python environment
 
-  if (outputDiv) outputDiv.innerHTML = '';
+${code}`;
+  
+  if (codeDiv) codeDiv.textContent = executableCode;
 
-  eval(code);
+  if (outputDiv) {
+    outputDiv.innerHTML = '<p style="color: #666; font-style: italic;">Click the "Copy" button above to copy the Python code to your clipboard, then run it in your Python environment.</p>';
+  }
+
+  // Note: For Python code, we just display it instead of executing it
+  // eval(code);
 };
 
 if (ws) {

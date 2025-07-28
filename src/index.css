@@ -30,9 +30,54 @@ code {
   margin: 1rem;
 }
 
-#generatedCode {
+#codeSection {
   height: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+#codeHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: rgb(240, 240, 240);
+  border-bottom: 1px solid rgb(220, 220, 220);
+}
+
+#codeHeader h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: rgb(60, 60, 60);
+}
+
+#copyButton {
+  background-color: rgb(76, 175, 80);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+
+#copyButton:hover {
+  background-color: rgb(67, 160, 71);
+}
+
+#copyButton:active {
+  background-color: rgb(56, 142, 60);
+}
+
+#copyButton.copied {
+  background-color: rgb(33, 150, 243);
+}
+
+#generatedCode {
+  flex: 1;
   background-color: rgb(247, 240, 228);
+  margin: 0;
 }
 
 #output {
