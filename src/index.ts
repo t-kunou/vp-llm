@@ -106,8 +106,9 @@ ${code}`;
   
   if (codeDiv) codeDiv.textContent = executableCode;
 
+  // Clear the output div instead of showing the copy message
   if (outputDiv) {
-    outputDiv.innerHTML = '<p style="color: #666; font-style: italic;">Click the "Copy" button above to copy the Python code to your clipboard, then run it in your Python environment.</p>';
+    outputDiv.innerHTML = '';
   }
 
   // Note: For Python code, we just display it instead of executing it
