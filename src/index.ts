@@ -25,7 +25,23 @@ const copyButton = document.getElementById('copyButton');
 if (!blocklyDiv) {
   throw new Error(`div with id 'blocklyDiv' not found`);
 }
-const ws = Blockly.inject(blocklyDiv, {toolbox});
+const ws = Blockly.inject(blocklyDiv, {
+  toolbox,
+  grid: {
+    spacing: 20,
+    length: 3,
+    colour: '#ccc',
+    snap: true
+  },
+  zoom: {
+    controls: false, // ズームコントロールは独自実装を使用
+    wheel: true,
+    startScale: 1.0,
+    maxScale: 3,
+    minScale: 0.3,
+    scaleSpeed: 1.2
+  }
+});
 
 // Copy functionality
 const copyCodeToClipboard = async () => {
