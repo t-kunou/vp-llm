@@ -60,7 +60,7 @@ forBlock['create_message'] = function (
   const messageType = block.getFieldValue('MESSAGE_TYPE');
   const content = generator.valueToCode(block, 'CONTENT', Order.NONE) || '""';
   
-  const code = `${messageType}(content=${content})\n`;
+  const code = `('${messageType}', ${content})\n`;
   
   return code;
 };

@@ -107,10 +107,9 @@ const createMessage = {
       type: 'field_dropdown',
       name: 'MESSAGE_TYPE',
       options: [
-        ['SystemMessage', 'SystemMessage'],
-        ['HumanMessage', 'HumanMessage'],
-        ['AIMessage', 'AIMessage'],
-        ['FunctionMessage', 'FunctionMessage'],
+        ['system', 'system'],
+        ['human', 'human'],
+        ['ai', 'ai'],
       ],
     },
     {
