@@ -678,6 +678,14 @@ export const toolbox = {
         },
         {
           kind: 'block',
+          type: 'create_message',
+        },
+        {
+          kind: 'block',
+          type: 'create_chat_prompt_template',
+        },
+        {
+          kind: 'block',
           type: 'llm_query',
         },
       ],

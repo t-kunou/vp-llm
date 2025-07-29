@@ -33,7 +33,7 @@ forBlock['llm_query'] = function (
   const variables = generator.valueToCode(block, 'VARIABLES', Order.NONE) || '{}';
   const parser = generator.valueToCode(block, 'PARSER', Order.NONE) || 'StrOutputParser()';
   
-  const code = `${parser}.invoke(${model}.invoke(${template}.format(**${variables})))`;
+  const code = `(${template} | ${model} | ${parser}).invoke(${variables})`;
   
   return [code, Order.FUNCTION_CALL];
 };
@@ -51,6 +51,39 @@ forBlock['create_model'] = function (
   }
   
   return [code, Order.FUNCTION_CALL];
+};
+
+forBlock['create_message'] = function (
+  block: Blockly.Block,
+  generator: Blockly.CodeGenerator,
+) {
+  const messageType = block.getFieldValue('MESSAGE_TYPE');
+  const content = generator.valueToCode(block, 'CONTENT', Order.NONE) || '""';
+  
+  const code = `${messageType}(content=${content})\n`;
+  
+  return code;
+};
+
+forBlock['create_chat_prompt_template'] = function (
+  block: Blockly.Block,
+  generator: Blockly.CodeGenerator,
+) {
+  const messages = generator.statementToCode(block, 'MESSAGES');
+  
+  if (messages) {
+    // Extract messages from the statement code
+    const lines = messages.trim().split('\n');
+    const messageItems = lines
+      .map(line => line.trim())
+      .filter(line => line && !line.startsWith('#'))
+      .join(', ');
+    
+    const code = `ChatPromptTemplate.from_messages([${messageItems}])`;
+    return [code, Order.FUNCTION_CALL];
+  } else {
+    return ['ChatPromptTemplate.from_messages([])', Order.FUNCTION_CALL];
+  }
 };
 
 forBlock['create_dict'] = function (

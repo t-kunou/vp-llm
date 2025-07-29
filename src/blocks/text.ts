@@ -98,6 +98,57 @@ const createModel = {
   helpUrl: '',
 };
 
+// LLM Message creation block
+const createMessage = {
+  type: 'create_message',
+  message0: 'Create %1 %2 content: %3',
+  args0: [
+    {
+      type: 'field_dropdown',
+      name: 'MESSAGE_TYPE',
+      options: [
+        ['SystemMessage', 'SystemMessage'],
+        ['HumanMessage', 'HumanMessage'],
+        ['AIMessage', 'AIMessage'],
+        ['FunctionMessage', 'FunctionMessage'],
+      ],
+    },
+    {
+      type: 'input_dummy',
+    },
+    {
+      type: 'input_value',
+      name: 'CONTENT',
+      check: 'String',
+    },
+  ],
+  output: null,
+  previousStatement: null,
+  nextStatement: null,
+  colour: 290,
+  tooltip: 'Create a message for LLM conversation',
+  helpUrl: '',
+};
+
+// ChatPromptTemplate creation block
+const createChatPromptTemplate = {
+  type: 'create_chat_prompt_template',
+  message0: 'Create ChatPromptTemplate %1 %2',
+  args0: [
+    {
+      type: 'input_dummy',
+    },
+    {
+      type: 'input_statement',
+      name: 'MESSAGES',
+    },
+  ],
+  output: null,
+  colour: 290,
+  tooltip: 'Create a ChatPromptTemplate from multiple messages',
+  helpUrl: '',
+};
+
 // Dictionary creation block with variable length key-value pairs
 const createDict = {
   type: 'create_dict',
@@ -265,6 +316,8 @@ export const blocks = Blockly.common.createBlockDefinitionsFromJsonArray([
   addText,
   llmQuery,
   createModel,
+  createMessage,
+  createChatPromptTemplate,
   createDict,
   dictPair,
   dictLength,
