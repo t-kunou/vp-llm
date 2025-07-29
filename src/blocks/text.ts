@@ -47,7 +47,7 @@ const inputBlock = {
 // LLM Query block for LangChain integration
 const llmQuery = {
   type: 'llm_query',
-  message0: 'LLM Query %1 model: %2 %3 template: %4 %5 variables: %6 %7 parser: %8',
+  message0: 'LLM Query %1 model: %2 %3 template: %4 %5 variables: %6 %7 optional_parser: %8',
   args0: [
     {
       type: 'input_dummy',
@@ -78,20 +78,20 @@ const llmQuery = {
     },
     {
       type: 'input_value',
-      name: 'PARSER',
+      name: 'OPTIONAL_PARSER',
       check: null,
     },
   ],
   output: 'String',
   colour: 290,
-  tooltip: 'Query LLM using LangChain with model, template, variables, and parser (defaults to StrOutputParser)',
+  tooltip: 'Query LLM using LangChain with model, template, variables, and optional parser (default: StrOutputParser)',
   helpUrl: '',
 };
 
 // LLM Model creation block
 const createModel = {
   type: 'create_model',
-  message0: 'Create %1 model %2 model name: %3 %4 temperature: %5',
+  message0: 'Create %1 model %2 model name: %3 %4 optional_temperature: %5',
   args0: [
     {
       type: 'field_dropdown',
@@ -113,13 +113,13 @@ const createModel = {
     },
     {
       type: 'input_value',
-      name: 'TEMPERATURE',
+      name: 'OPTIONAL_TEMPERATURE',
       check: 'Number',
     },
   ],
   output: null,
   colour: 290,
-  tooltip: 'Create an LLM model instance with temperature setting',
+  tooltip: 'Create an LLM model instance with optional temperature setting (default: 0.7)',
   helpUrl: '',
 };
 

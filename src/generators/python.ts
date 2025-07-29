@@ -42,7 +42,7 @@ forBlock['llm_query'] = function (
   const model = generator.valueToCode(block, 'MODEL', Order.NONE) || 'None';
   const template = generator.valueToCode(block, 'TEMPLATE', Order.NONE) || 'None';
   const variables = generator.valueToCode(block, 'VARIABLES', Order.NONE) || '{}';
-  const parser = generator.valueToCode(block, 'PARSER', Order.NONE) || 'StrOutputParser()';
+  const parser = generator.valueToCode(block, 'OPTIONAL_PARSER', Order.NONE) || 'StrOutputParser()';
   
   const code = `(${template} | ${model} | ${parser}).invoke(${variables})`;
   
@@ -55,7 +55,7 @@ forBlock['create_model'] = function (
 ) {
   const provider = block.getFieldValue('PROVIDER');
   const modelName = generator.valueToCode(block, 'MODEL_NAME', Order.NONE) || '"gpt-3.5-turbo"';
-  const temperature = generator.valueToCode(block, 'TEMPERATURE', Order.NONE) || '0.7';
+  const temperature = generator.valueToCode(block, 'OPTIONAL_TEMPERATURE', Order.NONE) || '0.7';
   
   let code = '';
   if (provider === 'openai') {
