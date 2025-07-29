@@ -55,10 +55,11 @@ forBlock['create_model'] = function (
 ) {
   const provider = block.getFieldValue('PROVIDER');
   const modelName = generator.valueToCode(block, 'MODEL_NAME', Order.NONE) || '"gpt-3.5-turbo"';
+  const temperature = generator.valueToCode(block, 'TEMPERATURE', Order.NONE) || '0.7';
   
   let code = '';
   if (provider === 'openai') {
-    code = `ChatOpenAI(model=${modelName})`;
+    code = `ChatOpenAI(model=${modelName}, temperature=${temperature})`;
   }
   
   return [code, Order.FUNCTION_CALL];

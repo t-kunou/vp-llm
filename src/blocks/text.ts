@@ -91,7 +91,7 @@ const llmQuery = {
 // LLM Model creation block
 const createModel = {
   type: 'create_model',
-  message0: 'Create %1 model %2 model name: %3',
+  message0: 'Create %1 model %2 model name: %3 %4 temperature: %5',
   args0: [
     {
       type: 'field_dropdown',
@@ -108,10 +108,18 @@ const createModel = {
       name: 'MODEL_NAME',
       check: 'String',
     },
+    {
+      type: 'input_dummy',
+    },
+    {
+      type: 'input_value',
+      name: 'TEMPERATURE',
+      check: 'Number',
+    },
   ],
   output: null,
   colour: 290,
-  tooltip: 'Create an LLM model instance',
+  tooltip: 'Create an LLM model instance with temperature setting',
   helpUrl: '',
 };
 
