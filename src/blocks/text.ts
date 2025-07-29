@@ -27,6 +27,23 @@ const addText = {
   helpUrl: '',
 };
 
+// Input block for user input
+const inputBlock = {
+  type: 'input_block',
+  message0: 'input %1',
+  args0: [
+    {
+      type: 'input_value',
+      name: 'MESSAGE',
+      check: 'String',
+    },
+  ],
+  output: 'String',
+  colour: 160,
+  tooltip: 'Get user input with a message prompt',
+  helpUrl: '',
+};
+
 // LLM Query block for LangChain integration
 const llmQuery = {
   type: 'llm_query',
@@ -313,6 +330,7 @@ const dictDelete = {
 // This file has no side effects!
 export const blocks = Blockly.common.createBlockDefinitionsFromJsonArray([
   addText,
+  inputBlock,
   llmQuery,
   createModel,
   createMessage,

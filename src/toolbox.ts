@@ -326,6 +326,10 @@ export const toolbox = {
       contents: [
         {
           kind: 'block',
+          type: 'input_block',
+        },
+        {
+          kind: 'block',
           type: 'text',
         },
         {

@@ -24,6 +24,17 @@ forBlock['add_text'] = function (
   return code;
 };
 
+forBlock['input_block'] = function (
+  block: Blockly.Block,
+  generator: Blockly.CodeGenerator,
+) {
+  const message = generator.valueToCode(block, 'MESSAGE', Order.NONE) || '""';
+  
+  const code = `input(${message})`;
+  
+  return [code, Order.FUNCTION_CALL];
+};
+
 forBlock['llm_query'] = function (
   block: Blockly.Block,
   generator: Blockly.CodeGenerator,
