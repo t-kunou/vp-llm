@@ -44,6 +44,24 @@ const inputBlock = {
   helpUrl: '',
 };
 
+// Print block for standard output
+const printBlock = {
+  type: 'print_block',
+  message0: 'print %1',
+  args0: [
+    {
+      type: 'input_value',
+      name: 'VALUE',
+      check: null,
+    },
+  ],
+  previousStatement: null,
+  nextStatement: null,
+  colour: 160,
+  tooltip: 'Print value to standard output',
+  helpUrl: '',
+};
+
 // LLM Query block for LangChain integration
 const llmQuery = {
   type: 'llm_query',
@@ -339,6 +357,7 @@ const dictDelete = {
 export const blocks = Blockly.common.createBlockDefinitionsFromJsonArray([
   addText,
   inputBlock,
+  printBlock,
   llmQuery,
   createModel,
   createMessage,

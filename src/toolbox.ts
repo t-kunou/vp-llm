@@ -321,13 +321,24 @@ export const toolbox = {
     },
     {
       kind: 'category',
-      name: 'Text',
-      categorystyle: 'text_category',
+      name: 'I/O',
+      categorystyle: 'variable_category',
       contents: [
         {
           kind: 'block',
           type: 'input_block',
         },
+        {
+          kind: 'block',
+          type: 'print_block',
+        },
+      ],
+    },
+    {
+      kind: 'category',
+      name: 'Text',
+      categorystyle: 'text_category',
+      contents: [
         {
           kind: 'block',
           type: 'text',

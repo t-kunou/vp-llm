@@ -35,6 +35,16 @@ forBlock['input_block'] = function (
   return [code, Order.FUNCTION_CALL];
 };
 
+forBlock['print_block'] = function (
+  block: Blockly.Block,
+  generator: Blockly.CodeGenerator,
+) {
+  const value = generator.valueToCode(block, 'VALUE', Order.NONE) || '""';
+  
+  const code = `print(${value})\n`;
+  return code;
+};
+
 forBlock['llm_query'] = function (
   block: Blockly.Block,
   generator: Blockly.CodeGenerator,
