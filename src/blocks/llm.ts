@@ -135,10 +135,76 @@ const createChatPromptTemplate = {
   helpUrl: '',
 };
 
+// LLM Chain creation block
+const createChain = {
+  type: 'create_chain',
+  message0: 'Create Chain %1 template: %2 %3 model: %4 %5 optional_parser: %6',
+  args0: [
+    {
+      type: 'input_dummy',
+    },
+    {
+      type: 'input_value',
+      name: 'TEMPLATE',
+      check: null,
+    },
+    {
+      type: 'input_dummy',
+    },
+    {
+      type: 'input_value',
+      name: 'MODEL',
+      check: null,
+    },
+    {
+      type: 'input_dummy',
+    },
+    {
+      type: 'input_value',
+      name: 'OPTIONAL_PARSER',
+      check: null,
+    },
+  ],
+  output: null,
+  colour: 290,
+  tooltip: 'Create a LangChain chain with template, model, and optional parser (default: StrOutputParser)',
+  helpUrl: '',
+};
+
+// LLM Chain invoke block
+const invokeChain = {
+  type: 'invoke_chain',
+  message0: 'Invoke Chain %1 chain: %2 %3 variables: %4',
+  args0: [
+    {
+      type: 'input_dummy',
+    },
+    {
+      type: 'input_value',
+      name: 'CHAIN',
+      check: null,
+    },
+    {
+      type: 'input_dummy',
+    },
+    {
+      type: 'input_value',
+      name: 'VARIABLES',
+      check: null,
+    },
+  ],
+  output: 'String',
+  colour: 290,
+  tooltip: 'Invoke a LangChain chain with variables',
+  helpUrl: '',
+};
+
 // Create the block definitions for LLM blocks.
 export const llmBlocks = Blockly.common.createBlockDefinitionsFromJsonArray([
   llmQuery,
   createModel,
   createMessage,
   createChatPromptTemplate,
+  createChain,
+  invokeChain,
 ]);

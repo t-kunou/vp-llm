@@ -207,3 +207,28 @@ forBlock['dict_add'] = function (
   const code = `${dict}[${key}] = ${value}\n`;
   return code;
 };
+
+forBlock['create_chain'] = function (
+  block: Blockly.Block,
+  generator: Blockly.CodeGenerator,
+) {
+  const template = generator.valueToCode(block, 'TEMPLATE', Order.NONE) || 'None';
+  const model = generator.valueToCode(block, 'MODEL', Order.NONE) || 'None';
+  const parser = generator.valueToCode(block, 'OPTIONAL_PARSER', Order.NONE) || 'StrOutputParser()';
+  
+  const code = `${template} | ${model} | ${parser}`;
+  
+  return [code, Order.BITWISE_OR];
+};
+
+forBlock['invoke_chain'] = function (
+  block: Blockly.Block,
+  generator: Blockly.CodeGenerator,
+) {
+  const chain = generator.valueToCode(block, 'CHAIN', Order.NONE) || 'None';
+  const variables = generator.valueToCode(block, 'VARIABLES', Order.NONE) || '{}';
+  
+  const code = `(${chain}).invoke(${variables})`;
+  
+  return [code, Order.FUNCTION_CALL];
+};

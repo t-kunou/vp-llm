@@ -707,6 +707,14 @@ export const toolbox = {
           kind: 'block',
           type: 'llm_query',
         },
+        {
+          kind: 'block',
+          type: 'create_chain',
+        },
+        {
+          kind: 'block',
+          type: 'invoke_chain',
+        },
       ],
     },
   ],
