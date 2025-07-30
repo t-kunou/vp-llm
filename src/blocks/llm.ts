@@ -241,6 +241,28 @@ const createRunnableWithMessageHistory = {
   helpUrl: '',
 };
 
+// MessagesPlaceholder creation block
+const createMessagesPlaceholder = {
+  type: 'create_messages_placeholder',
+  message0: 'Create MessagesPlaceholder %1 optional_variable_name: %2',
+  args0: [
+    {
+      type: 'input_dummy',
+    },
+    {
+      type: 'input_value',
+      name: 'OPTIONAL_VARIABLE_NAME',
+      check: 'String',
+    },
+  ],
+  output: null,
+  previousStatement: null,
+  nextStatement: null,
+  colour: 290,
+  tooltip: 'Create a MessagesPlaceholder with optional variable name (default: history)',
+  helpUrl: '',
+};
+
 // Create the block definitions for LLM blocks.
 export const llmBlocks = Blockly.common.createBlockDefinitionsFromJsonArray([
   llmQuery,
@@ -250,4 +272,5 @@ export const llmBlocks = Blockly.common.createBlockDefinitionsFromJsonArray([
   createChain,
   invokeChain,
   createRunnableWithMessageHistory,
+  createMessagesPlaceholder,
 ]);
