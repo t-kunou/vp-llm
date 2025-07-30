@@ -263,6 +263,42 @@ const createMessagesPlaceholder = {
   helpUrl: '',
 };
 
+// RunnableWithMessageHistory invoke block
+const invokeRunnableWithMessageHistory = {
+  type: 'invoke_runnable_with_message_history',
+  message0: 'Invoke RunnableWithMessageHistory %1 runnable: %2 %3 variables: %4 %5 config: %6',
+  args0: [
+    {
+      type: 'input_dummy',
+    },
+    {
+      type: 'input_value',
+      name: 'RUNNABLE',
+      check: null,
+    },
+    {
+      type: 'input_dummy',
+    },
+    {
+      type: 'input_value',
+      name: 'VARIABLES',
+      check: null,
+    },
+    {
+      type: 'input_dummy',
+    },
+    {
+      type: 'input_value',
+      name: 'CONFIG',
+      check: null,
+    },
+  ],
+  output: 'String',
+  colour: 290,
+  tooltip: 'Invoke a RunnableWithMessageHistory with variables and config',
+  helpUrl: '',
+};
+
 // Create the block definitions for LLM blocks.
 export const llmBlocks = Blockly.common.createBlockDefinitionsFromJsonArray([
   llmQuery,
@@ -273,4 +309,5 @@ export const llmBlocks = Blockly.common.createBlockDefinitionsFromJsonArray([
   invokeChain,
   createRunnableWithMessageHistory,
   createMessagesPlaceholder,
+  invokeRunnableWithMessageHistory,
 ]);

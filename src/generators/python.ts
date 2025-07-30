@@ -257,3 +257,16 @@ forBlock['create_messages_placeholder'] = function (
   
   return code;
 };
+
+forBlock['invoke_runnable_with_message_history'] = function (
+  block: Blockly.Block,
+  generator: Blockly.CodeGenerator,
+) {
+  const runnable = generator.valueToCode(block, 'RUNNABLE', Order.NONE) || 'None';
+  const variables = generator.valueToCode(block, 'VARIABLES', Order.NONE) || '{}';
+  const config = generator.valueToCode(block, 'CONFIG', Order.NONE) || '{}';
+  
+  const code = `(${runnable}).invoke(${variables}, config=${config})`;
+  
+  return [code, Order.FUNCTION_CALL];
+};
