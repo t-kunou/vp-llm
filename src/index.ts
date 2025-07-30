@@ -133,13 +133,19 @@ const importWorkspaceFromFile = () => {
       if (content) {
         const success = importWorkspace(ws, content);
         
+        if (success) {
+          // Save to localStorage after successful import
+          save(ws);
+          
+          // Trigger code regeneration after import
+          setTimeout(() => runCode(), 100);
+        }
+        
         // Visual feedback
         if (importButton) {
           const originalText = importButton.textContent;
           if (success) {
             importButton.textContent = '✓ Imported!';
-            // Trigger code regeneration after import
-            setTimeout(() => runCode(), 100);
           } else {
             importButton.textContent = '✗ Failed!';
           }

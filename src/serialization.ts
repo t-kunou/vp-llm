@@ -59,6 +59,11 @@ export const importWorkspace = function (workspace: Blockly.Workspace, jsonStrin
     Blockly.serialization.workspaces.load(data, workspace, undefined);
     Blockly.Events.enable();
     
+    // Fire a change event to trigger auto-save and code generation
+    setTimeout(() => {
+      Blockly.Events.fire(new Blockly.Events.FinishedLoading(workspace));
+    }, 50);
+    
     return true;
   } catch (error) {
     console.error('Failed to import workspace:', error);
