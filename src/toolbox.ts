@@ -660,6 +660,10 @@ export const toolbox = {
         },
         {
           kind: 'block',
+          type: 'dict_add',
+        },
+        {
+          kind: 'block',
           type: 'dict_delete',
         },
       ],

@@ -196,3 +196,14 @@ forBlock['dict_delete'] = function (
   const code = `del ${dict}[${key}]\n`;
   return code;
 };
+
+forBlock['dict_add'] = function (
+  block: Blockly.Block,
+  generator: Blockly.CodeGenerator,
+) {
+  const dict = generator.valueToCode(block, 'DICT', Order.NONE) || '{}';
+  const key = generator.valueToCode(block, 'KEY', Order.NONE) || '""';
+  const value = generator.valueToCode(block, 'VALUE', Order.NONE) || 'None';
+  const code = `${dict}[${key}] = ${value}\n`;
+  return code;
+};

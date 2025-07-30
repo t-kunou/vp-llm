@@ -351,6 +351,34 @@ const dictDelete = {
   helpUrl: '',
 };
 
+// Dictionary add/set key-value block
+const dictAdd = {
+  type: 'dict_add',
+  message0: 'in %1 set key %2 to value %3',
+  args0: [
+    {
+      type: 'input_value',
+      name: 'DICT',
+      check: null,
+    },
+    {
+      type: 'input_value',
+      name: 'KEY',
+      check: 'String',
+    },
+    {
+      type: 'input_value',
+      name: 'VALUE',
+      check: null,
+    },
+  ],
+  previousStatement: null,
+  nextStatement: null,
+  colour: 290,
+  tooltip: 'Adds or updates a key-value pair in the dictionary',
+  helpUrl: '',
+};
+
 // Create the block definitions for the JSON-only blocks.
 // This does not register their definitions with Blockly.
 // This file has no side effects!
@@ -370,4 +398,5 @@ export const blocks = Blockly.common.createBlockDefinitionsFromJsonArray([
   dictKeys,
   dictGet,
   dictDelete,
+  dictAdd,
 ]);
