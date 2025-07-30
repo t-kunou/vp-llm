@@ -8,7 +8,7 @@ import * as Blockly from 'blockly';
 import {blocks} from './blocks/text';
 import {forBlock} from './generators/python';
 import {pythonGenerator} from 'blockly/python';
-import {save, load} from './serialization';
+import {save, load, downloadWorkspace, importWorkspace} from './serialization';
 import {toolbox} from './toolbox';
 import './index.css';
 
@@ -21,6 +21,8 @@ const codeDiv = document.getElementById('generatedCode')?.firstChild;
 const outputDiv = document.getElementById('output');
 const blocklyDiv = document.getElementById('blocklyDiv');
 const copyButton = document.getElementById('copyButton');
+const exportButton = document.getElementById('exportButton');
+const importButton = document.getElementById('importButton');
 const toggleButton = document.getElementById('toggleButton');
 const outputPane = document.getElementById('outputPane');
 
@@ -91,6 +93,76 @@ const copyCodeToClipboard = async () => {
 // Add click event listener to copy button
 if (copyButton) {
   copyButton.addEventListener('click', copyCodeToClipboard);
+}
+
+// Export functionality
+const exportWorkspaceToFile = () => {
+  if (!ws) return;
+  
+  const timestamp = new Date().toISOString().slice(0, 19).replace(/:/g, '-');
+  const filename = `blockly-workspace-${timestamp}.json`;
+  
+  downloadWorkspace(ws, filename);
+  
+  // Visual feedback
+  if (exportButton) {
+    const originalText = exportButton.textContent;
+    exportButton.textContent = '✓ Exported!';
+    
+    setTimeout(() => {
+      exportButton.textContent = originalText;
+    }, 2000);
+  }
+};
+
+// Import functionality
+const importWorkspaceFromFile = () => {
+  if (!ws) return;
+  
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = '.json';
+  
+  input.onchange = (event) => {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const content = e.target?.result as string;
+      if (content) {
+        const success = importWorkspace(ws, content);
+        
+        // Visual feedback
+        if (importButton) {
+          const originalText = importButton.textContent;
+          if (success) {
+            importButton.textContent = '✓ Imported!';
+            // Trigger code regeneration after import
+            setTimeout(() => runCode(), 100);
+          } else {
+            importButton.textContent = '✗ Failed!';
+          }
+          
+          setTimeout(() => {
+            importButton.textContent = originalText;
+          }, 2000);
+        }
+      }
+    };
+    reader.readAsText(file);
+  };
+  
+  input.click();
+};
+
+// Add click event listeners for export/import buttons
+if (exportButton) {
+  exportButton.addEventListener('click', exportWorkspaceToFile);
+}
+
+if (importButton) {
+  importButton.addEventListener('click', importWorkspaceFromFile);
 }
 
 // Toggle panel functionality
