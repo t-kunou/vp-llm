@@ -253,7 +253,7 @@ forBlock['create_messages_placeholder'] = function (
 ) {
   const variableName = generator.valueToCode(block, 'OPTIONAL_VARIABLE_NAME', Order.NONE) || '"history"';
   
-  const code = `MessagesPlaceholder(variable_name=${variableName})\n`;
+  const code = `MessagesPlaceholder(variable_name=${variableName})`;
   
   return code;
 };
