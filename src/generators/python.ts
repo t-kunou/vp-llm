@@ -232,3 +232,41 @@ forBlock['invoke_chain'] = function (
   
   return [code, Order.FUNCTION_CALL];
 };
+
+forBlock['create_runnable_with_message_history'] = function (
+  block: Blockly.Block,
+  generator: Blockly.CodeGenerator,
+) {
+  const chain = generator.valueToCode(block, 'CHAIN', Order.NONE) || 'None';
+  const getSessionHistory = generator.valueToCode(block, 'OPTIONAL_GET_SESSION_HISTORY', Order.NONE) || 'get_session_history';
+  const inputMessagesKey = generator.valueToCode(block, 'OPTIONAL_INPUT_MESSAGES_KEY', Order.NONE) || '"input"';
+  const historyMessagesKey = generator.valueToCode(block, 'OPTIONAL_HISTORY_MESSAGES_KEY', Order.NONE) || '"history"';
+  
+  const code = `RunnableWithMessageHistory(${chain}, ${getSessionHistory}, input_messages_key=${inputMessagesKey}, history_messages_key=${historyMessagesKey})`;
+  
+  return [code, Order.FUNCTION_CALL];
+};
+
+forBlock['create_messages_placeholder'] = function (
+  block: Blockly.Block,
+  generator: Blockly.CodeGenerator,
+) {
+  const variableName = generator.valueToCode(block, 'OPTIONAL_VARIABLE_NAME', Order.NONE) || '"history"';
+  
+  const code = `MessagesPlaceholder(variable_name=${variableName})`;
+  
+  return code;
+};
+
+forBlock['invoke_runnable_with_message_history'] = function (
+  block: Blockly.Block,
+  generator: Blockly.CodeGenerator,
+) {
+  const runnable = generator.valueToCode(block, 'RUNNABLE', Order.NONE) || 'None';
+  const variables = generator.valueToCode(block, 'VARIABLES', Order.NONE) || '{}';
+  const config = generator.valueToCode(block, 'CONFIG', Order.NONE) || '{}';
+  
+  const code = `(${runnable}).invoke(${variables}, config=${config})`;
+  
+  return [code, Order.FUNCTION_CALL];
+};

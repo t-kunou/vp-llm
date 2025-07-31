@@ -199,6 +199,106 @@ const invokeChain = {
   helpUrl: '',
 };
 
+// RunnableWithMessageHistory creation block
+const createRunnableWithMessageHistory = {
+  type: 'create_runnable_with_message_history',
+  message0: 'Create RunnableWithMessageHistory',
+  message1: 'chain: %1',
+  message2: 'optional_get_session_history: %1',
+  message3: 'optional_input_messages_key: %1',
+  message4: 'optional_history_messages_key: %1',
+  args1: [
+    {
+      type: 'input_value',
+      name: 'CHAIN',
+      check: null,
+    },
+  ],
+  args2: [
+    {
+      type: 'input_value',
+      name: 'OPTIONAL_GET_SESSION_HISTORY',
+      check: null,
+    },
+  ],
+  args3: [
+    {
+      type: 'input_value',
+      name: 'OPTIONAL_INPUT_MESSAGES_KEY',
+      check: 'String',
+    },
+  ],
+  args4: [
+    {
+      type: 'input_value',
+      name: 'OPTIONAL_HISTORY_MESSAGES_KEY',
+      check: 'String',
+    },
+  ],
+  output: null,
+  colour: 290,
+  tooltip: 'Create a RunnableWithMessageHistory with chain and optional history configuration (defaults: get_session_history, input, history)',
+  helpUrl: '',
+};
+
+// MessagesPlaceholder creation block
+const createMessagesPlaceholder = {
+  type: 'create_messages_placeholder',
+  message0: 'Create MessagesPlaceholder %1 optional_variable_name: %2',
+  args0: [
+    {
+      type: 'input_dummy',
+    },
+    {
+      type: 'input_value',
+      name: 'OPTIONAL_VARIABLE_NAME',
+      check: 'String',
+    },
+  ],
+  output: null,
+  previousStatement: null,
+  nextStatement: null,
+  colour: 290,
+  tooltip: 'Create a MessagesPlaceholder with optional variable name (default: history)',
+  helpUrl: '',
+};
+
+// RunnableWithMessageHistory invoke block
+const invokeRunnableWithMessageHistory = {
+  type: 'invoke_runnable_with_message_history',
+  message0: 'Invoke RunnableWithMessageHistory %1 runnable: %2 %3 variables: %4 %5 config: %6',
+  args0: [
+    {
+      type: 'input_dummy',
+    },
+    {
+      type: 'input_value',
+      name: 'RUNNABLE',
+      check: null,
+    },
+    {
+      type: 'input_dummy',
+    },
+    {
+      type: 'input_value',
+      name: 'VARIABLES',
+      check: null,
+    },
+    {
+      type: 'input_dummy',
+    },
+    {
+      type: 'input_value',
+      name: 'CONFIG',
+      check: null,
+    },
+  ],
+  output: 'String',
+  colour: 290,
+  tooltip: 'Invoke a RunnableWithMessageHistory with variables and config',
+  helpUrl: '',
+};
+
 // Create the block definitions for LLM blocks.
 export const llmBlocks = Blockly.common.createBlockDefinitionsFromJsonArray([
   llmQuery,
@@ -207,4 +307,7 @@ export const llmBlocks = Blockly.common.createBlockDefinitionsFromJsonArray([
   createChatPromptTemplate,
   createChain,
   invokeChain,
+  createRunnableWithMessageHistory,
+  createMessagesPlaceholder,
+  invokeRunnableWithMessageHistory,
 ]);

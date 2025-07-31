@@ -715,6 +715,18 @@ export const toolbox = {
           kind: 'block',
           type: 'invoke_chain',
         },
+        {
+          kind: 'block',
+          type: 'create_runnable_with_message_history',
+        },
+        {
+          kind: 'block',
+          type: 'create_messages_placeholder',
+        },
+        {
+          kind: 'block',
+          type: 'invoke_runnable_with_message_history',
+        },
       ],
     },
   ],
