@@ -79,7 +79,12 @@ code {
   color: rgb(60, 60, 60);
 }
 
-#copyButton {
+#headerButtons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+#copyButton, #exportButton, #importButton {
   background-color: rgb(76, 175, 80);
   color: white;
   border: none;
@@ -90,12 +95,20 @@ code {
   transition: background-color 0.2s;
 }
 
-#copyButton:hover {
-  background-color: rgb(67, 160, 71);
+#exportButton {
+  background-color: rgb(33, 150, 243);
 }
 
-#copyButton:active {
-  background-color: rgb(56, 142, 60);
+#importButton {
+  background-color: rgb(255, 152, 0);
+}
+
+#copyButton:hover, #exportButton:hover, #importButton:hover {
+  opacity: 0.9;
+}
+
+#copyButton:active, #exportButton:active, #importButton:active {
+  transform: translateY(1px);
 }
 
 #copyButton.copied {
@@ -110,4 +123,9 @@ code {
 
 #output {
   height: 10%;
+}
+
+/* Hidden file input */
+input[type="file"] {
+  display: none;
 }
